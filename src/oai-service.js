@@ -1,9 +1,10 @@
 const axios = require('axios');
 const OAIRequestStatus = require('./types/oai-request-status');
 
-const engine_id = process.env.OPENAI_ENGINE_ID || '';
-const url = `https://api.openai.com/v1/engines/${engine_id}/completions`;
-const open_api_key = process.env.OPEN_API_KEY || '';
+const engine_id     = process.env.OPENAI_ENGINE_ID || '';
+const open_api_key  = process.env.OPEN_API_KEY || '';
+
+const openai_url    = `https://api.openai.com/v1/engines/${engine_id}/completions`;
 
 // OpenAI Service Class
 class OAIService {
@@ -27,7 +28,7 @@ class OAIService {
                 }
             };
 
-            const res = await axios.post(url, data, config);
+            const res = await axios.post(openai_url, data, config);
             if (!res || !res.data || !Array.isArray(res.data.choices) || res.data.choices.length === 0) {
                 throw 'NO DATA'
             }

@@ -1,15 +1,15 @@
 const { createClient } = require('redis');
 const OAIRequestStatus = require('./types/oai-request-status');
 
-const REDIS_URL = process.env.REDIS_URL || '';
-const QUEUE_CHANNEL = process.env.QUEUE_CHANNEL || '';
+const REDIS_URL             = process.env.REDIS_URL || '';
+const QUEUE_CHANNEL         = process.env.QUEUE_CHANNEL || '';
 
-const TBL_PREFIX = 'request';
-const TBL_FIELD_ID = 'id';
-const TBL_FIELD_MSG = 'msg';
-const TBL_FIELD_RESPONSE = 'resp';
-const TBL_FIELD_STATUS = 'status';
-const INDEX_SET_PREFIX = 'msg';
+const TBL_PREFIX            = 'request';
+const TBL_FIELD_ID          = 'id';
+const TBL_FIELD_MSG         = 'msg';
+const TBL_FIELD_RESPONSE    = 'resp';
+const TBL_FIELD_STATUS      = 'status';
+const INDEX_SET_PREFIX      = 'msg';
 
 // RedisService Class
 class RedisService {

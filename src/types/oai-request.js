@@ -3,8 +3,8 @@ class OpenAIRequest {
     msg;
 
     constructor(id, msg) {
-        this.id = id;
-        this.msg = msg;
+        this.id     = id;
+        this.msg    = msg;
     }
 }
 
