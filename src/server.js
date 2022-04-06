@@ -1,5 +1,6 @@
 const OAIService = require("./oai-service");
 const RedisService = require("./redis-service");
+const OpenAIRequest = require("./types/oai-request");
 
 class Server {
     constructor() {
@@ -11,11 +12,22 @@ class Server {
         this.redisService.setup();
 
         // Init OpenAI Service
-        this.oaiService = new OAIService();
+        this.oaiService = new OAIService(this.onOAIComplete.bind(this));
     }
 
-    onMessage(message) {
-        this.oaiService.sendRequest();
+    onMessage(data) {
+        try {
+            const {id, msg} = data;
+            const request = new OpenAIRequest(id, msg)
+
+            this.oaiService.sendRequest(request);
+        } catch (err) {
+            console.log('ERROR Parsing Request', err);
+        }
+    }
+
+    onOAIComplete(data) {
+        this.redisService.handleOAIResponse(data);
     }
 }
 
